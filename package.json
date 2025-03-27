@@ -1,6 +1,6 @@
 {
   "name": "@erickzhao/electron-versions",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Get Electron and Chromium versions for tags in a given directory",
   "exports": "./built/index.mjs",
   "types": "built/index.d.mts",
