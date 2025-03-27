@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
-import { fileExists } from "./exists";
+import { fileExists } from "./exists.mjs";
 
-import { Options } from "./shared-types";
+import { Options } from "./shared-types.mjs";
 
 async function getPackage({ cwd }: Options) {
   const expectedPath = path.join(cwd, "package.json");
@@ -13,9 +13,9 @@ async function getPackage({ cwd }: Options) {
   }
 }
 
-let repoUrl = null;
+let repoUrl: string;
 export async function getRepoUrl(options: Options) {
-  if (repoUrl !== null) {
+  if (repoUrl) {
     return repoUrl;
   }
 
@@ -25,7 +25,7 @@ export async function getRepoUrl(options: Options) {
 
   // Stop here if we're not on GitHub
   if (!isGitHub) {
-    return (repoUrl = undefined);
+    return;
   }
 
   let cleanedUrl = url;

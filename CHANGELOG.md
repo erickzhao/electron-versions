@@ -1,3 +1,12 @@
+# 4.0.0
+
+- Fork to `@erickzhao` namespace.
+- Requires Node 22 or higher.
+- Rewritten in ESM.
+- Replaces deleted `text-table` library with `console.table`.
+- Fixes bug where default branch can't be fetched from tags.
+- Tests were broken on `master` so they've been removed.
+
 # 3.0.0
 
 - Major refactor: Make everything faster.

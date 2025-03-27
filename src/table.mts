@@ -1,22 +1,23 @@
-import textTable from "text-table";
-import markdownTable from "markdown-table";
+import { markdownTable } from "markdown-table";
 
-import { getRepoUrl } from "./package";
-import { Options, Version } from "./shared-types";
+import { getRepoUrl } from "./package.mjs";
+import { Options, Version } from "./shared-types.mjs";
 
-export function getTextTable(versions: Array<Version> = []) {
-  const rows = [];
+export function printTextTable(versions: Array<Version> = []) {
+  const rows: Record<
+    string,
+    { electron: string; chromium: string; date: string }
+  > = {};
 
   for (const { tag, electron, chromium, date } of versions) {
-    rows.push([
-      `Tag ${tag}`,
-      `Electron ${electron || "?"}`,
-      `Chromium ${chromium || "?"}`,
-      `Date ${date || "?"}`,
-    ]);
+    rows[tag] = {
+      electron,
+      chromium,
+      date,
+    };
   }
 
-  return textTable(rows);
+  return console.table(rows);
 }
 
 export async function getMarkdownTable(

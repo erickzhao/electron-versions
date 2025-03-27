@@ -1,19 +1,21 @@
 #!/usr/bin/env node
 
-import * as fs from "fs";
-import * as path from "path";
-import { EOL } from "os";
+import fs from "node:fs";
+import path from "node:path";
+import { EOL } from "node:os";
 
-import { getVersions } from "./electron-versions";
-import { writeMarkdown } from "./write-markdown";
-import { getTextTable } from "./table";
-import { Options, Version } from "./shared-types";
-import { getJson, writeJson } from "./json";
+import minimist from "minimist";
 
-const argv = require("minimist")(process.argv.slice(2));
+import { getVersions } from "./electron-versions.mjs";
+import { writeMarkdown } from "./write-markdown.mjs";
+import { printTextTable } from "./table.mjs";
+import { Options, Version } from "./shared-types.mjs";
+import { getJson, writeJson } from "./json.mjs";
+
+const argv = minimist(process.argv.slice(2));
 const help = !!(argv["h"] || argv["help"]);
 const filter = argv["f"] || argv["filter"];
-const allowedPrereleases = (argv["p"] || argv["allowed-pre"] || '').split(',');
+const allowedPrereleases = (argv["p"] || argv["allowed-pre"] || "").split(",");
 const length = argv["l"] || argv["length"] || 10;
 const writeMarkdownArg = argv["write-markdown"];
 const writeJsonArg = argv["write-json"];
@@ -22,20 +24,20 @@ const cwd = getTargetDir();
 const mdPath = getWriteDir("md", writeMarkdownArg);
 const jsonPath = getWriteDir("json", writeJsonArg);
 
+const options: Options = {
+  cwd,
+  filter,
+  length,
+  onProgress,
+  mdPath,
+  jsonPath,
+  allowedPrereleases,
+};
+
 async function main() {
   if (help) {
     return printHelp();
   }
-
-  const options: Options = {
-    cwd,
-    filter,
-    length,
-    onProgress,
-    mdPath,
-    jsonPath,
-    allowedPrereleases,
-  };
 
   const versions = await getVersions(options);
 
@@ -104,7 +106,7 @@ function printResult(versions: Array<Version> = []) {
     return console.log(getJson(versions));
   }
 
-  console.log(getTextTable(versions));
+  printTextTable(versions);
 }
 
 function printHelp() {

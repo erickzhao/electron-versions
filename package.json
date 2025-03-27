@@ -1,35 +1,41 @@
 {
-  "name": "electron-versions",
+  "name": "@erickzhao/electron-versions",
   "version": "3.0.1",
   "description": "Get Electron and Chromium versions for tags in a given directory",
-  "main": "built/index.js",
-  "types": "built/index.d.ts",
+  "exports": "./built/index.mjs",
+  "types": "built/index.d.mts",
+  "type": "module",
   "bin": {
-    "electron-versions": "built/bin.js"
+    "electron-versions": "built/bin.mjs"
   },
   "scripts": {
-    "test": "node ./test/test.js",
+    "test": "node ./test/test.mjs",
     "build": "tsc",
-    "prepare": "npm run build",
-    "prettier": "npx prettier \"src\" -w"
+    "prepublishOnly": "npm run build",
+    "prettier": "npx prettier \"src\""
   },
   "author": "Felix Rieseberg <felix@felixrieseberg.com>",
-  "repository": "github:felixrieseberg/electron-versions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erickzhao/electron-versions.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@malept/cross-spawn-promise": "^2.0.0",
-    "got": "^11.0.4",
-    "markdown-table": "^2.0.0",
+    "got": "^14.4.6",
+    "markdown-table": "^3.0.4",
     "minimist": "^1.2.5",
-    "semver": "^7.3.4",
-    "text-table": "^0.2.0"
+    "semver": "^7.7.1"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31",
+    "@tsconfig/node22": "^22.0.1",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^22.13.14",
     "@types/semver": "^7.3.4",
-    "typescript": "^4.2.2"
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">12.13.0"
+    "node": ">=22"
   }
 }

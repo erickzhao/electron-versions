@@ -1,8 +1,8 @@
 import * as fs from "fs";
 
-import { Options, Version } from "./shared-types";
+import { Options, Version } from "./shared-types.mjs";
 
-export async function readJson({ jsonPath }) {
+export async function readJson({ jsonPath }: { jsonPath: string }) {
   let data = {};
 
   try {
@@ -16,7 +16,10 @@ export async function readJson({ jsonPath }) {
 }
 
 export function getJson(versions: Array<Version>) {
-  const data = {};
+  const data: Record<
+    string,
+    { electron: string; chromium: string; date: string }
+  > = {};
 
   versions.forEach(({ tag, electron, chromium, date }) => {
     data[tag] = { electron, chromium, date };
@@ -25,6 +28,9 @@ export function getJson(versions: Array<Version>) {
   return JSON.stringify(data, undefined, 2);
 }
 
-export async function writeJson(versions: Array<Version>, { jsonPath }: Options) {
+export async function writeJson(
+  versions: Array<Version>,
+  { jsonPath }: Options
+) {
   await fs.promises.writeFile(jsonPath, getJson(versions));
 }
