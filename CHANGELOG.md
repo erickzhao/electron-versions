@@ -1,3 +1,7 @@
+# 4.0.1
+
+- Keeps `origin/` prefix when fetching default branch object name.
+
 # 4.0.0
 
 - Fork to `@erickzhao` namespace.
