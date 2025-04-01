@@ -136,7 +136,5 @@ async function readPackageJson(tag: string, { cwd }: Options) {
 async function getDefaultBranch({ cwd }: Options) {
   return (
     await spawn("git", ["rev-parse", "--abbrev-ref", "origin/HEAD"], { cwd })
-  )
-    .trim()
-    .split("origin/")[1];
+  ).trim();
 }
