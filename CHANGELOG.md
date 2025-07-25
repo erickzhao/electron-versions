@@ -1,3 +1,8 @@
+# 4.1.0
+
+- Added `--defaultBranch` parameter to allow user to pass in main branch to read versions from
+  instead of getting the value with `git rev-parse`. Defaults to `origin/master`.
+
 # 4.0.1
 
 - Keeps `origin/` prefix when fetching default branch object name.

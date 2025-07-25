@@ -17,6 +17,7 @@ const help = !!(argv["h"] || argv["help"]);
 const filter = argv["f"] || argv["filter"];
 const allowedPrereleases = (argv["p"] || argv["allowed-pre"] || "").split(",");
 const length = argv["l"] || argv["length"] || 10;
+const defaultBranch = argv["default-branch"] || "origin/master";
 const writeMarkdownArg = argv["write-markdown"];
 const writeJsonArg = argv["write-json"];
 const printJson = argv["json"];
@@ -32,6 +33,7 @@ const options: Options = {
   mdPath,
   jsonPath,
   allowedPrereleases,
+  defaultBranch,
 };
 
 async function main() {
@@ -122,6 +124,7 @@ function printHelp() {
   text += `json:           Print result as JSON${EOL}`;
   text += `write-markdown  Write results to a md file (optionally, with a path)${EOL}`;
   text += `write-json      Write results to a json file (optionally, with a path). Speeds up future execution.${EOL}`;
+  text += `default-branch  Default branch to read versions from.${EOL}`;
 }
 
 main().catch((err) => {

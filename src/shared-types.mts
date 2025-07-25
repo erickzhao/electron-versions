@@ -6,6 +6,7 @@ export interface Options {
   onProgress?: (done: number, left: number, total: number) => void;
   mdPath: string;
   jsonPath: string;
+  defaultBranch: string;
 }
 
 export interface Version {

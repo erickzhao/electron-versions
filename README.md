@@ -22,6 +22,7 @@ Tag 4.4.3   Electron 7.2.4          Chromium 78.0.3904.130
  * `--write-markdown`: Write the results to a markdown file
  * `--write-json`: Write the results to a json file (will speed up future runs)
  * `--json`: Print the result as JSON
+ * `--defaultBranch`: Default branch to read from (default: `origin/master`)
 
 ## Usage as a module
 This module is synchronous. It could be async, but since using this

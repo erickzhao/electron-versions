@@ -55,7 +55,7 @@ async function getTags(options: Options) {
   tags = tags.slice(0, length);
 
   // Throw in the default branch
-  tags.unshift(await getDefaultBranch(options));
+  tags.unshift(options.defaultBranch);
 
   return tags;
 }
@@ -131,10 +131,4 @@ async function readPackageJson(tag: string, { cwd }: Options) {
   const parsed = JSON.parse(raw);
 
   return parsed;
-}
-
-async function getDefaultBranch({ cwd }: Options) {
-  return (
-    await spawn("git", ["rev-parse", "--abbrev-ref", "origin/HEAD"], { cwd })
-  ).trim();
 }
